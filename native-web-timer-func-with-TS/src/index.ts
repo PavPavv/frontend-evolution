@@ -1,4 +1,4 @@
-const main = () => {
+const main = (): void => {
   const timer = document.querySelector('.time');
   const startBtn = document.querySelector('.start-btn');
   const stopBtn = document.querySelector('.stop-btn');
