@@ -1,0 +1,94 @@
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  background: lightskyblue;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 600px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+#timer {
+  border-radius: 8px;
+  padding: 15px;
+  background: #ffffff;
+}
+
+.timer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 30px;
+  background: #0d276e;
+}
+
+.time {
+  font-size: 60px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.start-btn {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  color: #0d276e;
+  font-weight: bold;
+  font-size: 30px;
+  background: orange;
+  outline: none;
+  cursor: pointer;
+}
+
+.stop-btn {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  color: orange;
+  font-weight: bold;
+  font-size: 30px;
+  background: #0d276e;
+  outline: none;
+  cursor: pointer;
+}
+
+.clear-btn {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  color: orange;
+  font-weight: bold;
+  font-size: 30px;
+  background: #00868a;
+  outline: none;
+  cursor: pointer;
+}
+
+button:not(:last-child) {
+  margin-right: 10px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
