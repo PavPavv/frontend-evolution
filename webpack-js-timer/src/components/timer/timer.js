@@ -44,13 +44,13 @@ const timer = () => {
   function handleStart() {
     var date = new Date();
     stopBtn.removeAttribute('disabled');
-    startBtn.setAttribute('disabled', true);
+    startBtn.setAttribute('disabled', 'true');
     startDate = date;
     isStart = true;
   }
 
   function handleStop() {
-    stopBtn.setAttribute('disabled', true);
+    stopBtn.setAttribute('disabled', 'true');
     clearBtn.removeAttribute('disabled');
     stopDate = nextDate;
     isStart = false;
@@ -58,7 +58,7 @@ const timer = () => {
 
   function handleClear() {
     startBtn.removeAttribute('disabled');
-    clearBtn.setAttribute('disabled', true);
+    clearBtn.setAttribute('disabled', 'true');
     startDate = undefined;
     nextDate = undefined;
     stopDate = undefined;
