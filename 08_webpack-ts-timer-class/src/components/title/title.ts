@@ -1,16 +1,17 @@
 import SimpleComponent from '../base/SimpleComponent';
 
 class Title extends SimpleComponent {
+  title: string;
+
   constructor(title = '') {
     super();
-    this.isLogical = false;
     this.title = title;
   }
 
   getTemplate() {
     return `
       <section>
-        <a href="#">Main</a>
+        <a>Test</a>
         <h1>${this.title}</h1>
       </section>
     `;
@@ -19,6 +20,8 @@ class Title extends SimpleComponent {
   build() {
     return this.getTemplate();
   }
+
+  applyLogic() {}
 }
 
 export default Title;

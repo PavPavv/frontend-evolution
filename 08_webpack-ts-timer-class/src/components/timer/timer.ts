@@ -15,62 +15,74 @@ class Timer extends ComplexComponent {
       </div>
     </section>
   `;
-  timer = null;
-  startBtn = null;
-  stopBtn = null;
-  clearBtn = null;
-  isStart = false;
-  startDate = undefined;
-  nextDate = undefined;
-  stopDate = undefined;
+  timer: Element | null = null;
+  startBtn: Element | null = null;
+  stopBtn: Element | null = null;
+  clearBtn: Element | null = null;
+  isStart: boolean = false;
+  startDate: Date | undefined = undefined;
+  nextDate: Date | undefined = undefined;
+  stopDate: Date | undefined = undefined;
 
   constructor() {
     super();
-    this.isLogical = true;
   }
 
-  getElementsFromDOM() {
+  getElementsFromDOM(): void {
     this.timer = document.querySelector('.time');
     this.startBtn = document.querySelector('.start-btn');
     this.stopBtn = document.querySelector('.stop-btn');
     this.clearBtn = document.querySelector('.clear-btn');
   }
 
-  start() {
+  start(): void {
     var date = new Date();
-    this.stopBtn.removeAttribute('disabled');
-    this.startBtn.setAttribute('disabled', true);
+    if (this.stopBtn && this.startBtn) {
+      this.stopBtn.removeAttribute('disabled');
+      this.startBtn.setAttribute('disabled', 'true');
+    }
     this.startDate = date;
     this.isStart = true;
   }
 
-  stop() {
-    this.stopBtn.setAttribute('disabled', true);
-    this.clearBtn.removeAttribute('disabled');
+  stop(): void {
+    if (this.stopBtn && this.clearBtn) {
+      this.stopBtn.setAttribute('disabled', 'true');
+      this.clearBtn.removeAttribute('disabled');
+    }
     this.stopDate = this.nextDate;
     this.isStart = false;
   }
 
-  clear() {
-    this.startBtn.removeAttribute('disabled');
-    this.clearBtn.setAttribute('disabled', true);
+  clear(): void {
+    if (this.startBtn && this.clearBtn) {
+      this.startBtn.removeAttribute('disabled');
+      this.clearBtn.setAttribute('disabled', 'true');
+    }
     this.startDate = undefined;
     this.nextDate = undefined;
     this.stopDate = undefined;
-    this.timer.innerHTML = '--:--:--';
+    if (this.timer) {
+      this.timer.innerHTML = '--:--:--';
+    }
   }
 
-  addHandlers() {
-    this.startBtn.addEventListener('click', this.start.bind(this));
-    this.stopBtn.addEventListener('click', this.stop.bind(this));
-    this.clearBtn.addEventListener('click', this.clear.bind(this));
+  addHandlers(): void {
+    if (this.startBtn && this.stopBtn && this.clearBtn) {
+      this.startBtn.addEventListener('click', this.start.bind(this));
+      this.stopBtn.addEventListener('click', this.stop.bind(this));
+      this.clearBtn.addEventListener('click', this.clear.bind(this));
+    }
   }
 
-  calcDiff(startTime, endTime) {
-    return new Date(endTime - startTime);
+  calcDiff(startTime?: Date, endTime?: Date): Date {
+    if (startTime && endTime) {
+      return new Date(endTime.valueOf() - startTime.valueOf());
+    }
+    return new Date();
   }
 
-  formatDate(date) {
+  formatDate(date: Date): string {
     if (date) {
       var d = new Date(date);
       var localOffset = d.getTimezoneOffset() / 60;
@@ -84,31 +96,33 @@ class Timer extends ComplexComponent {
     return '--:--:--';
   }
 
-  getClockTime() {
+  getClockTime(): void {
     if (this.isStart) {
       var date = new Date();
       this.nextDate = date;
       var formattedTime = this.formatDate(
         this.calcDiff(this.startDate, this.nextDate),
       );
-      this.timer.innerHTML = formattedTime;
+      if (this.timer) {
+        this.timer.innerHTML = formattedTime;
+      }
     }
     return;
   }
 
-  run() {
+  run(): void {
     setInterval(() => {
       this.getClockTime();
     }, 1000);
   }
 
-  applyLogic() {
+  applyLogic(): void {
     this.getElementsFromDOM();
     this.addHandlers();
     this.run();
   }
 
-  build() {
+  build(): string {
     return this.template;
   }
 }

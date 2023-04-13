@@ -1,13 +1,18 @@
-import title from './components/title/title';
-import timer from './components/timer/timer';
+class App {
+  constructor(rootElemStr = 'body', widgetsArr = []) {
+    this.rootElemStr = rootElemStr;
+    this.widgets = widgetsArr;
+  }
+  run() {
+    const rootElem = document.querySelector(this.rootElemStr);
+    for (const widget of this.widgets) {
+      rootElem.insertAdjacentHTML('beforeend', widget.build());
+      const isComplicated = widget.isLogical;
+      if (isComplicated) {
+        widget.applyLogic();
+      }
+    }
+  }
+}
 
-const app = () => {
-  const element = document.createElement('div');
-  element.classList.add('container');
-  element.setAttribute('id', 'root');
-  element.appendChild(title('Test'));
-  element.appendChild(timer());
-  return element;
-};
-
-export default app;
+export default App;

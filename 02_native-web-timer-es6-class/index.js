@@ -1,5 +1,3 @@
-'use strict';
-
 class SimpleComponent {
   isLogical() {
     return false;
@@ -22,7 +20,7 @@ class Title extends SimpleComponent {
   getTemplate() {
     return `
       <section>
-        <a href="../index.html">Main</a>
+        <a href="#">Main</a>
         <h1>${this.title}</h1>
       </section>
     `;

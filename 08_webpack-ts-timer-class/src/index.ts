@@ -5,7 +5,6 @@ import Timer from './components/timer/timer';
 import './styles/index.css';
 
 const app = new App('.container', [new Title('Timer'), new Timer()]);
-
 app.run();
 
 // Some main notes on Webpack here:
