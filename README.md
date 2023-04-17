@@ -15,4 +15,9 @@
 5. [Webpack JS modules bundle (Functional approach)](https://github.com/PavPavv/frontend-evolution/tree/main/05_webpack-js-timer) project size - 22,7 MB, bundle size - 7.8kB
 6. [Webpack JS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/06_webpack-js-timer-class) project size - 22,7 MB, bundle size - 8.6kB
 7. [Webpack TS modules bundle (Functional approach)](https://github.com/PavPavv/frontend-evolution/tree/main/07_webpack-ts-timer) project size - 62,7 MB, bundle size - 8kB
-8. [Webpack TS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/08_webpack-ts-timer-class) project size -  , bundle size -
+8. [Webpack TS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/08_webpack-ts-timer-class) project size -  62,7 MB, bundle size - 10.3kB
+9. TODO: React with JS
+10. TODO React with TS
+11. TODO: Docker Nginx React TS
+12. TODO: Docker Nginx Next
+13. Vite React TS
