@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './Title.module.css';
+
 export class Title extends Component {
   render() {
-    return <h1>{this.props.title}</h1>;
+    return <h1 className={styles.h1}>{this.props.title}</h1>;
   }
 }
 
