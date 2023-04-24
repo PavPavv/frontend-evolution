@@ -3,4 +3,5 @@
 07_webpack-ts-timer/node_modules
 08_webpack-ts-timer-class/node_modules
 09_webpack-react-js-timer-class/node_modules
-09_webpack-react-js-timer-func/node_modules
+10_webpack-react-js-timer-func/node_modules
+11_webpack-react-ts-class-timer/node_modules
