@@ -12,7 +12,6 @@ export class Timer extends Component {
       isStopped: false,
       isClear: false,
       startDate: undefined,
-      nextDate: undefined,
       stopDate: undefined,
       timer: '--:--:--',
     };
@@ -25,7 +24,6 @@ export class Timer extends Component {
   getClockTime(startDate) {
     if (startDate) {
       const date = new Date();
-      this.setState({ nextDate: date });
       const formattedTime = formatDate(calcDiff(startDate, date));
       return formattedTime;
     }
@@ -71,7 +69,6 @@ export class Timer extends Component {
       isStopped: false,
       isClear: false,
       startDate: undefined,
-      nextDate: undefined,
       stopDate: undefined,
       timer: '--:--:--',
     });
