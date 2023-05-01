@@ -24,11 +24,11 @@
 
 8. [Webpack TS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/08_webpack-ts-timer-class) project size -  62.7 MB, bundle size - 10.3KB
 
-9. [Webpack with React JS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/08_webpack-ts-timer-class) project size -  60.8 MB, bundle size - 158.3KB
+9. [Webpack with React JS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/09_webpack-react-js-timer-class) project size -  60.8 MB, bundle size - 158.3KB
 
-10. [Webpack with React JS modules bundle (Functional approach)](https://github.com/PavPavv/frontend-evolution/tree/main/08_webpack-ts-timer-class) project size -  MB, bundle size - KB
+10. [Webpack with React JS modules bundle (Functional approach)](https://github.com/PavPavv/frontend-evolution/tree/main/10_webpack-react-js-timer-func) project size - 57.6 MB, bundle size - 154.3 KB
 
-11. TODO React with TS
+11. [Webpack with React and TS modules bundle (OOP approach)](https://github.com/PavPavv/frontend-evolution/tree/main/11_webpack-react-ts-class-timer) project size - 98.9 MB, bundle size - 151.1 KB
 
 12. TODO: Docker Nginx React TS
 

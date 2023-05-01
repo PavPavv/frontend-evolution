@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 
+import styles from './Timer.module.css';
 import { calcDiff, formatDate } from '../../util';
 
-import styles from './Timer.module.css';
+interface IProps {}
+interface IState {
+  isStart: boolean;
+  isStopped: boolean;
+  isClear: boolean;
+  startDate?: Date;
+  stopDate?: Date;
+  timer: string;
+}
 
-export class Timer extends Component {
-  interval = undefined;
-  constructor(props) {
+class Timer extends Component<IProps, IState> {
+  interval: NodeJS.Timer | undefined = undefined;
+
+  constructor(props: IProps) {
     super(props);
     this.state = {
       isStart: false,
@@ -22,7 +32,7 @@ export class Timer extends Component {
     this.handleClear = this.handleClear.bind(this);
   }
 
-  getClockTime(startDate) {
+  getClockTime(startDate?: Date) {
     if (startDate) {
       const date = new Date();
       const formattedTime = formatDate(calcDiff(startDate, date));
@@ -63,7 +73,6 @@ export class Timer extends Component {
 
   handleClear() {
     console.log('clear');
-    const date = new Date();
     this.interval = undefined;
     this.setState({
       isStart: false,
@@ -79,11 +88,20 @@ export class Timer extends Component {
     console.log('componentDidMount this.state.isStart', this.state.isStart);
   }
 
+  shouldComponentUpdate(): boolean {
+    console.log('shouldComponentUpdate');
+    return true;
+  }
+
   componentDidUpdate() {
     console.log('componentDidUpdate this.state.isStart', this.state.isStart);
   }
 
-  render() {
+  componentWillUnmount(): void {
+    console.log('componentWillUnmount');
+  }
+
+  render(): React.ReactNode {
     return (
       <section className={styles.timer}>
         <div className={styles.timer__panel}>
@@ -118,3 +136,5 @@ export class Timer extends Component {
     );
   }
 }
+
+export default Timer;

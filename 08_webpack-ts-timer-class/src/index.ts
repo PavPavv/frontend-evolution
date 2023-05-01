@@ -1,6 +1,6 @@
 import App from './app';
-import Title from './components/title/title';
-import Timer from './components/timer/timer';
+import Title from './components/title/Title';
+import Timer from './components/timer/Timer';
 
 import './styles/index.css';
 
