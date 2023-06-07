@@ -54,6 +54,11 @@ The vital ones:
    But at first, let's connect to the NPM universe via initializing empty project with JS package manager tool. For this you can choose between **npm** and **yarn** that are almost similar. I will use **yarn** here.
 
 ```bash
+cd project-folder
+mkdir build public src
+touch public/index.html
+mkdir src/app src/entities src/features src/pages src/shared src/widgets
+touch src/index.tsx src/app/index.tsx src/app/index.css
 yarn init
 ```
 
@@ -69,8 +74,8 @@ Now, you have node_modules folder and all "goods" from there. Also among vital d
 yarn add --dev @babel/core @babel/plugin-transform-react-jsx @babel/preset-env @babel/preset-react @types/node @types/react @types/react-dom babel-loader cross-env css-loader html-webpack-plugin style-loader ts-loader typescript
 ```
 
-And it is not even yet to start developing 🙄
-The last part of crucial and vital packages is render library. In this particular case I will choose React, but it can be any of render framework or library (Vue, Angular, Next, Preact and etc.)
+And it is not even close to start developing 🙄
+The last part of crucial and vital packages is to add render library. In this particular case I choose React, but it can be any of render framework or library (Vue, Angular, Next, Preact and etc.)
 
 ```bash
 yarn add react react-dom
@@ -111,3 +116,135 @@ It is a single way to organize your project structure with FSD 💪. But of cour
 - README.md
 
 ### 3. Config
+
+Modern frontend apps need a lot of configs... like a lot!😓
+
+tsconfig.json:
+
+```json
+{
+  "compilerOptions": {
+    "target": "es2020" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018', 'ES2019', 'ES2020' or 'ESNEXT'. */,
+    "module": "esnext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ] /* Specify library files to be included in the compilation. */,
+    "jsx": "react" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
+    "outDir": "build" /* Redirect output structure to the directory. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "allowSyntheticDefaultImports": true /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */,
+    "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
+    "baseUrl": ".",
+    /* Base directory to resolve non-absolute module names. */ "paths": {
+      "@/*": ["src/*"],
+      "@shared/*": ["src/shared/*"],
+      "@app/*": ["src/app/*"],
+      "@entities/*": ["src/entities/*"],
+      "@features/*": ["src/features/*"],
+      "@pages/*": ["src/pages/*"],
+      "@processes/*": ["src/processes/*"],
+      "@widgets/*": ["src/widgets/*"]
+    }
+  },
+  "exclude": ["coverage"],
+  "include": ["src", "@types"]
+}
+```
+
+webpack.config.js:
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// setting up automatically in package.json start/build
+//  commands via "cross-env" package
+const isDevelopment = process.env.NODE_ENV === 'development';
+const DEV_PORT = process.env.DEV_PORT || 4000;
+
+// entry, output, mode, plugins, module, resolve, devServer
+module.exports = {
+  entry: './src/index.tsx',
+
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build'),
+    clean: true,
+  },
+
+  mode: isDevelopment ? 'development' : 'production',
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, 'public', 'index.html'),
+      minify: isDevelopment
+        ? undefined
+        : {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          },
+    }),
+  ],
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(js|jsx)$/i,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
+        test: /\.(ts|tsx)$/i,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'build'),
+    },
+    port: DEV_PORT,
+    hot: true,
+    historyApiFallback: true,
+  },
+};
+```
+
+Add to _package.json_ scripts in order to run your app in the mode you need:
+
+```json
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=development webpack serve --open",
+    "build": "cross-env NODE_ENV=production webpack"
+  }
+}
+```
