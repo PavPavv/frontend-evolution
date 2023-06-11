@@ -42,16 +42,14 @@
 
 In essence creating modern JS web application is just a deal of installing necessary npm packages (libraries), creating strict project structure and create and write a bunch of config files in the project root directory. As you can see now you need to know JS not to write code, but to understand how to use libraries. 🤡
 
-### NPM packages
+### 1. Vital NPM packages
 
 Now JS universe is a NPM and it consists of its atoms - packages, which are also known as "libraries". You have to construct your app with some packages you need.
 There are vital ones and app specified ones.
 
-The vital ones:
+The vital ones: bundling, transpiling, rendering.
 
-1. Bundler packages. JS is a just a script language, he can't too much at its core. So in order be able to control pretty huge amount of JavaScript code you need to decompose it and
-   bundle it in the production for the single JS-bundle for the browser. So there are two huge stages - development and production. Humans can't write production code (binary for machines or optimized and minimized ES5 for browsers) yet. So we need to split up these two stages. For development we need structured decomposed readable JS pieces of code and for production optimized and minimized EcmaScript5. And here we need help of bundlers. There are plenty of 'em, so I will use in this example one of the most popular one - Webpack.
-   But at first, let's connect to the NPM universe via initializing empty project with JS package manager tool. For this you can choose between **npm** and **yarn** that are almost similar. I will use **yarn** here.
+Bundler packages. JS is a just a script language, he can't too much at its core. So in order be able to control pretty huge amount of JavaScript code you need to decompose it and bundle it in the production for the single JS-bundle for the browser. So there are two huge stages - development and production. Humans can't write production code (binary for machines or optimized and minimized ES5 for browsers) yet. So we need to split up these two stages. For development we need structured decomposed readable JS pieces of code and for production optimized and minimized EcmaScript5. And here we need help of bundlers. There are plenty of 'em, so I will use in this example one of the most popular one - Webpack. But at first, let's connect to the NPM universe via initializing empty project with JS package manager tool. For this you can choose between **npm** and **yarn** that are almost similar. I will use **yarn** here.
 
 ```bash
 cd project-folder
@@ -79,6 +77,26 @@ The last part of crucial and vital packages is to add render library. In this pa
 
 ```bash
 yarn add react react-dom
+```
+
+Styles
+
+```bash
+yarn add --dev sass mini-css-extract-plugin
+```
+
+```bash
+yarn add classnames
+```
+
+Routing
+
+```bash
+yarn add react-router react-router-dom compose-function
+```
+
+```bash
+yarn add --dev @types/react-router @types/react-router-dom @types/compose-function
 ```
 
 ### 2. Structure
@@ -158,6 +176,7 @@ webpack.config.js:
 ```js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // setting up automatically in package.json start/build
 //  commands via "cross-env" package
@@ -195,13 +214,39 @@ module.exports = {
             minifyURLs: true,
           },
     }),
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].css',
+      chunkFilename: 'static/css/[name].chunk.css',
+      ignoreOrder: true,
+    }),
   ],
 
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(scss|pcss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false,
+              modules: {
+                mode: 'local',
+                localIdentName: isDevelopment
+                  ? '[folder]__[local]_[hash:base64:6]'
+                  : '[hash:base64:6]',
+                exportLocalsConvention: 'camelCase',
+              },
+              importLoaders: 1,
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/i,
@@ -248,3 +293,5 @@ Add to _package.json_ scripts in order to run your app in the mode you need:
   }
 }
 ```
+
+To be continued...
