@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // setting up automatically in package.json start/build
 //  commands via "cross-env" package
@@ -37,6 +38,11 @@ module.exports = {
             minifyURLs: true,
           },
     }),
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].css',
+      chunkFilename: 'static/css/[name].chunk.css',
+      ignoreOrder: true,
+    }),
   ],
 
   module: {
@@ -44,6 +50,31 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(scss|pcss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false,
+              modules: {
+                mode: 'local',
+                localIdentName: isDevelopment
+                  ? '[folder]__[local]_[hash:base64:6]'
+                  : '[hash:base64:6]',
+                exportLocalsConvention: 'camelCase',
+              },
+              importLoaders: 1,
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/i,
