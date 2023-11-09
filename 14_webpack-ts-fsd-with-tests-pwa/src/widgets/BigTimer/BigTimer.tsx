@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import { getClockTime } from '../../shared/utils';
 
+import Box from '../../shared/ui/Box';
 import Button from '../../shared/ui/Button';
 import TimeBoard from '../../features/TimeBoard';
 
@@ -62,6 +63,7 @@ const BigTimer = (): JSX.Element => {
         >
           Start
         </Button>
+        <Box mr='10' />
         <Button
           color='secondary'
           disabled={!isStart || isStopped}
@@ -69,6 +71,7 @@ const BigTimer = (): JSX.Element => {
         >
           Stop
         </Button>
+        <Box mr='10' />
         <Button color='action' disabled={!isClear} onClick={handleClear}>
           Clear
         </Button>

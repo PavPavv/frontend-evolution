@@ -32,9 +32,9 @@
 
 12. [Webpack with React and TS modules bundle (Func approach)](https://github.com/PavPavv/frontend-evolution/tree/main/12_webpack-react-ts-func-timer) project size - 98.7 MB, bundle size - 148.8 KB
 
-13. [Webpack with React, TS, FSD, lazy loading and tests](https://github.com/PavPavv/frontend-evolution/tree/main/12_webpack-react-ts-func-timer/13_webpack-ts-fsd-with-tests)
+13. [Webpack with React, TS, FSD, lazy loading and tests](https://github.com/PavPavv/frontend-evolution/tree/main/13_webpack-ts-fsd-with-tests)
 
-14. Vite React TS
+14. [Webpack with React, TS, FSD, lazy loading, tests and PWA](https://github.com/PavPavv/frontend-evolution/tree/main/14_webpack-ts-fsd-with-tests-pwa)
 
 ---
 
