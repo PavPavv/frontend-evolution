@@ -2,16 +2,23 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CreateFilePlugin = require('create-file-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 
 // setting up automatically in package.json start/build
 //  commands via "cross-env" package
 const isDevelopment = process.env.NODE_ENV === 'development';
 const DEV_PORT = process.env.DEV_PORT || 4000;
 
-// entry, output, mode, plugins, module, resolve, devServer
+/*  
+  Webpack object structure:
+  - entry,
+  - output,
+  - mode,
+  - plugins,
+  - module,
+  - resolve, 
+  - devServer 
+*/
 module.exports = {
   entry: './src/index.tsx',
 
@@ -47,51 +54,20 @@ module.exports = {
       chunkFilename: 'static/css/[name].chunk.css',
       ignoreOrder: true,
     }),
-    // new CleanWebpackPlugin({
-    //   cleanOnceBeforeBuildPatterns: ['!sw.js', '!config/nginx.conf'],
-    // }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: './public',
-    //       globOptions: {
-    //         dot: true,
-    //         gitignore: true,
-    //         ignore: ['**/index.html'],
-    //       },
-    //     },
-    //     {
-    //       from: './src/sw.js',
-    //       to: `./sw.js`,
-    //     },
-    //     // {
-    //     //   from: './src/assets',
-    //     //   to: './assets/[path]/[name].[contenthash:8][ext]',
-    //     //   globOptions: {
-    //     //     dot: true,
-    //     //     gitignore: true,
-    //     //     ignore: ['**/*.svg'],
-    //     //   },
-    //     // },
-    //   ],
-    // // }),
-    // new WorkboxPlugin.GenerateSW({
-    //   // these options encourage the ServiceWorkers to get in there fast
-    //   // and not allow any straggling "old" SWs to hang around
-    //   clientsClaim: true,
-    //   skipWaiting: true,
-    // }),
-    // new CopyWebpackPlugin({
-    //   // patterns: [
-    //   //   {
-    //   //     from: '',
-    //   //     to: '',
-    //   //   },
-    //   // ],
-    // }),
-    new WorkboxPlugin.InjectManifest({
-      swSrc: './src/src-sw.js',
-      swDest: 'sw.js',
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['!sw.js', '!config/nginx.conf'],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './public',
+          globOptions: {
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
     }),
   ],
 
@@ -156,7 +132,6 @@ module.exports = {
     port: DEV_PORT,
     hot: true,
     historyApiFallback: true,
-    // https: true,
-    // writeToDisk: true,
+    https: true,
   },
 };
