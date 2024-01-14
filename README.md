@@ -34,7 +34,9 @@
 
 13. [Webpack with React, TS, FSD, lazy loading and tests](https://github.com/PavPavv/frontend-evolution/tree/main/13_webpack-ts-fsd-with-tests) project size - 162.7 MB, bundle size - 147.3 KB
 
-14. [Webpack with React, TS, FSD, lazy loading, tests and PWA](https://github.com/PavPavv/frontend-evolution/tree/main/14_webpack-ts-fsd-with-tests-pwa) project size - ???, bundle size - ???
+14. [Webpack with React, TS, FSD, lazy loading, tests and PWA](https://github.com/PavPavv/frontend-evolution/tree/main/14_webpack-ts-fsd-with-tests-pwa) project size - 172.9 MB, bundle size - 143.7 KB
+
+15. [Vite with React, TS, FSD, lazy loading, tests](https://github.com/PavPavv/frontend-evolution/tree/main/15_vite-ts-fsd-with-tests) project size - ???, bundle size - ???
 
 ---
 

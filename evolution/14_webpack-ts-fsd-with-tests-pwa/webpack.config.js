@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // setting up automatically in package.json start/build
 //  commands via "cross-env" package
 const isDevelopment = process.env.NODE_ENV === 'development';
-const DEV_PORT = process.env.DEV_PORT || 4000;
+const DEV_PORT = process.env.DEV_PORT || 5000;
 
 /*  
   Webpack object structure:
