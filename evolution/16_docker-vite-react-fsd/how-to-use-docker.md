@@ -1,4 +1,4 @@
-# How to use Docker
+# How to use Docker with React
 
 ## Add "Dockerfile" to the root of your project
 
