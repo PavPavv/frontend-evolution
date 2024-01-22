@@ -36,6 +36,12 @@ Run in the project root directory (where is Dockerfile is placed) the following 
 docker build -t <your-image-name> .
 ```
 
+Rebuild the image (the same exact command)
+
+```py
+docker build -t <your-image-name> .
+```
+
 Check the list of Docker images:
 
 ```py
@@ -50,7 +56,7 @@ docker image rm <image-id>
 
 > check out basic Docker cheat sheet: [https://github.com/PavPavv/my_programming_bookmarks/blob/main/md/backend/docker.md](https://github.com/PavPavv/my_programming_bookmarks/blob/main/md/backend/docker.md)
 
-## Create Docker container for the image
+## Create Docker container from the image
 
 Create and run named container with detach function and port from the image:
 
@@ -68,4 +74,40 @@ Kill a running container if you need so:
 
 ```py
 docker rm <you-container-name> -f
+```
+
+Get into the container's shell
+
+```py
+docker exec -it <your-container> sh
+```
+
+Get out from the container's shell
+
+```py
+exit
+```
+
+### Hot refresh with Docker (Bind mounts)
+
+**Bind mounts** have limited functionality compared to volumes. When you use a bind mount, a file or directory on the host machine is mounted into a container. The file or directory is referenced by its absolute path on the host machine. By contrast, when you use a volume, a new directory is created within Docker's storage directory on the host machine, and Docker manages that directory's contents.
+
+The file or directory does not need to exist on the Docker host already. It is created on demand if it does not yet exist. Bind mounts are very performant, but they rely on the host machine's filesystem having a specific directory structure available.
+
+Run the container with a special flags:
+
+```py
+docker run -v your/local/directory:container/directory -d -p 5173:5173 --name <your-container-name> <your-image-name>
+```
+
+like:
+
+```py
+docker run -v $(pwd)/src:/app/src -d -p 3000:5173 --name <your-container-name> <your-image-name>
+```
+
+Read only bind mount:
+
+```py
+docker run -v $(pwd)/src:/app/src:ro -d -p 3000:5173 --name <your-container-name> <your-image-name>
 ```
