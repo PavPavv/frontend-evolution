@@ -18,12 +18,13 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <h2>Test</h2>
-      <div className='card'>
+      {/* <div className='card'>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-      </div>
-      <p className='read-the-docs'>PASHA!!</p>
+      </div> */}
+      <p className='read-the-docs'>ENV:</p>
+      <p className='read-the-docs'>{import.meta.env.VITE_APP_NAME}</p>
     </>
   );
 }

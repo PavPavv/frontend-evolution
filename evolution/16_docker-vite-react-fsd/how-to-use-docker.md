@@ -4,7 +4,7 @@
 
 ## Describe "Dockerfile"
 
-```py
+```bash
 # Specify platform and it's version
 FROM node
 
@@ -32,25 +32,25 @@ CMD ["npm", "run", "dev"]
 Run in the project root directory (where is Dockerfile is placed) the following command
 (Create named image)
 
-```py
+```bash
 docker build -t <your-image-name> .
 ```
 
 Rebuild the image (the same exact command)
 
-```py
+```bash
 docker build -t <your-image-name> .
 ```
 
 Check the list of Docker images:
 
-```py
+```bash
 docker images
 ```
 
 Remove unnamed image (if you need so):
 
-```py
+```bash
 docker image rm <image-id>
 ```
 
@@ -60,31 +60,31 @@ docker image rm <image-id>
 
 Create and run named container with detach function and port from the image:
 
-```py
+```bash
 docker run -d -p 5173:5173 --name <your-container-name> <your-image-name>
 ```
 
 Check all the running containers:
 
-```py
+```bash
 docker ps
 ```
 
 Kill a running container if you need so:
 
-```py
+```bash
 docker rm <you-container-name> -f
 ```
 
 Get into the container's shell
 
-```py
+```bash
 docker exec -it <your-container> sh
 ```
 
 Get out from the container's shell
 
-```py
+```bash
 exit
 ```
 
@@ -96,18 +96,73 @@ The file or directory does not need to exist on the Docker host already. It is c
 
 Run the container with a special flags:
 
-```py
+```bash
 docker run -v your/local/directory:container/directory -d -p 5173:5173 --name <your-container-name> <your-image-name>
 ```
 
 like:
 
-```py
+```bash
 docker run -v $(pwd)/src:/app/src -d -p 3000:5173 --name <your-container-name> <your-image-name>
 ```
 
 Read only bind mount:
 
-```py
+```bash
 docker run -v $(pwd)/src:/app/src:ro -d -p 3000:5173 --name <your-container-name> <your-image-name>
+```
+
+Add env variables file:
+
+```bash
+docker run --env-file ./.env -v $(pwd)/src:/app/src:ro -d -p 3000:5173 --name <your-container-name> <your-image-name>
+```
+
+## Docker-compose
+
+> Spacing matters!
+
+1. Create _docker-compose.yml_ file
+
+```yml
+# Compose doesn't use version to select an exact schema to validate the Compose file, but prefers the most recent schema when it's implemented.
+version: '3'
+# Services represents in docker-compose docker containers
+services:
+  vite-react-app:
+    # Specify an image for the service/container
+    # In fact, we decompose docker terminal command, like:
+    # docker run --env-file ./.env -v $(pwd)/src:/app/src:ro -d -p 3000:5173 --name <your-container-name> <your-image-name>
+    # <your-image-name>
+    build: .
+    # -p 3000:5173
+    ports:
+      - '3000:5173'
+    # -v $(pwd)/src:/app/src
+    volumes:
+      - ./src:/app/src
+    # -e VITE_APP_NAME=pavpav
+    # environment:
+    #   - VITE_APP_NAME=pavpav
+    # --env-file ./.env
+    env_file:
+      - ./.env
+```
+
+2. Run the target containers by running docker-compose:
+
+```bash
+docker-compose up -d
+```
+
+If you want to rebuild image:
+
+```bash
+docker-compose up -d --build
+```
+
+3. Stop containers:
+
+```bash
+docker-compose down
 ```
