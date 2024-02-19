@@ -38,6 +38,8 @@
 
 15. [Vite with React, TS, FSD, lazy loading, tests](https://github.com/PavPavv/frontend-evolution/tree/main/15_vite-ts-fsd-with-tests) project size - ???, bundle size - ???
 
+16. [Vite with React, TS, FSD, Docker](https://github.com/PavPavv/frontend-evolution/tree/main/15_vite-ts-fsd-with-tests) project size - ???, bundle size - ???
+
 ---
 
 - [How to create a frontend app in 2023 with React as a render library and Webpack as a bundler](./start1.md)
