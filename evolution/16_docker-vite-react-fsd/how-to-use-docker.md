@@ -36,6 +36,12 @@ Run in the project root directory (where is Dockerfile is placed) the following 
 docker build -t <your-image-name> .
 ```
 
+Build image with custom Dockerfile name
+
+```bash
+docker build -f Dockerfile.dev -t <your-image-name> .
+```
+
 Rebuild the image (the same exact command)
 
 ```bash
@@ -165,4 +171,10 @@ docker-compose up -d --build
 
 ```bash
 docker-compose down
+```
+
+4. Run several docker-compose files for many containers:
+
+```bash
+sudo docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d --build
 ```
